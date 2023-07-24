@@ -1,39 +1,76 @@
 import "./Form.css";
-import TextField from "../TextField/TextField"
+import TextField from "../TextField/TextField";
 import DropdownList from "../DropdownList/DropdownList";
 import Button from "../Button/Button";
+import { useState } from "react";
 
-const Form = () => {
+const Form = (props) => {
+  const teams = [
+    "programacao",
+    "front end",
+    "datascience",
+    "devops",
+    "ux & design",
+    "mobile",
+    "inovacao e gestao",
+  ];
 
-    const teams = [
-        'programacao',
-        'front end',
-        'datascience',
-        'devops',
-        'ux & design',
-        'mobile',
-        'inovacao e gestao',
-    ]
+  //forma padrao de formar um hook 'useState. passamos entre chaves um valor, e depois a forma como esse valor
+  // vai ser incrementado (setter), ou seja, [valor, setValor]. Depois chamamos a funcao 'useState' passando o valor
+  // inicial de 'valor' para ele, nesse caso, uma string vazia
+  const [name, setName] = useState("");
+  const [position, setPosition] = useState("");
+  const [image, setImage] = useState("");
+  const [team, setTeam] = useState(teams[0])
 
-    const formSubmiting = (event) => {
-        console.log("oi")
-        event.preventDefault();
-    }
+  //funcao criada para passar as informcoes do funcionario adicionado para o pai, app.js, via a funcao passada via
+  //props 'employeeCreated'
+  const formSubmiting = (event) => {
+    event.preventDefault();
+    props.employeeCreated({
+        name: name,
+        position: position,
+        image: image,
+        team: team,
+    });
+  };
 
-    return(
-        <section className="myForm">
-            <form onSubmit={formSubmiting}>
-                <h2>Fill in the information to create the employee's card</h2>
-                <TextField mandatory={true} label="Name" placeholder="Enter Your Name"/>
-                <TextField mandatory={true} label="Position" placeholder="Enter Your Position"/>
-                <TextField mandatory={false} label="Image" placeholder="Provide the image URL"/>
-                <DropdownList mandatory={true} label="Team" items={teams}/>
-                <Button>
-                    Create Card
-                </Button>
-            </form>
-        </section>
-    );
-}
+  return (
+    <section className="myForm">
+      <form onSubmit={formSubmiting}>
+        <h2>Fill in the information to create the employee's card</h2>
+        <TextField
+          mandatory={true}
+          label="Name"
+          placeholder="Enter Your Name"
+          text={name}
+          whenChanged={(text) => setName(text)}
+        />
+        <TextField
+          mandatory={true}
+          label="Position"
+          placeholder="Enter Your Position"
+          text={position}
+          whenChanged={(text) => setPosition(text)}
+        />
+        <TextField
+          mandatory={false}
+          label="Image"
+          placeholder="Provide the image URL"
+          text={image}
+          whenChanged={(text) => setImage(text)}
+        />
+        <DropdownList 
+            mandatory={true} 
+            label="Team" 
+            items={teams} 
+            text={team}
+            whenChanged={(text) => setTeam(text)}
+        />
+        <Button>Create Card</Button>
+      </form>
+    </section>
+  );
+};
 
 export default Form;
