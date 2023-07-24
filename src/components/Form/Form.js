@@ -5,23 +5,13 @@ import Button from "../Button/Button";
 import { useState } from "react";
 
 const Form = (props) => {
-  const teams = [
-    "programacao",
-    "front end",
-    "datascience",
-    "devops",
-    "ux & design",
-    "mobile",
-    "inovacao e gestao",
-  ];
-
   //forma padrao de formar um hook 'useState. passamos entre chaves um valor, e depois a forma como esse valor
   // vai ser incrementado (setter), ou seja, [valor, setValor]. Depois chamamos a funcao 'useState' passando o valor
   // inicial de 'valor' para ele, nesse caso, uma string vazia
   const [name, setName] = useState("");
   const [position, setPosition] = useState("");
   const [image, setImage] = useState("");
-  const [team, setTeam] = useState(teams[0])
+  const [team, setTeam] = useState("Programacao")
 
   //funcao criada para passar as informcoes do funcionario adicionado para o pai, app.js, via a funcao passada via
   //props 'employeeCreated'
@@ -63,7 +53,7 @@ const Form = (props) => {
         <DropdownList 
             mandatory={true} 
             label="Team" 
-            items={teams} 
+            items={props.teamName} 
             text={team}
             whenChanged={(text) => setTeam(text)}
         />
