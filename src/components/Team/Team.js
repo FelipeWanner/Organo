@@ -12,9 +12,11 @@ const Team = (props) => {
       <div className="team-employee">
         {props.employees.map((employee) => (
           <Employee
+            key={employee.name}
             name={employee.name}
             position={employee.position}
             image={employee.image}
+            primaryColor={props.primaryColor}
           />
         ))}
       </div>
