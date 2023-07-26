@@ -23,6 +23,12 @@ const Form = (props) => {
         image: image,
         team: team,
     });
+
+    //agora iremos limpar o form (depois de submeter os dados), atribuindo uma string vazia a suas variaveis
+    setName("")
+    setPosition("")
+    setImage("")
+    setTeam("")
   };
 
   return (
