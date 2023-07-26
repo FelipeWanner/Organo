@@ -1,3 +1,4 @@
+import Employee from "../Employee/Employee";
 import "./Team.css";
 
 const Team = (props) => {
@@ -6,6 +7,7 @@ const Team = (props) => {
         <h3 style={{ borderColor: props.primaryColor }}>
             {props.teamName}
         </h3>
+        <Employee />
     </section>
   );
 };
