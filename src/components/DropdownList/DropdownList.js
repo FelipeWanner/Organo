@@ -9,6 +9,7 @@ const DropdownList = (props) => {
         onChange={(event) => props.whenChanged(event.target.value)}
         value={props.text}
       >
+        <option value=""/> {/* option vazia para representar a nao escolha de nenhum time */}
         {props.items.map((item) => (
           <option key={item}>{item}</option>
         ))}
